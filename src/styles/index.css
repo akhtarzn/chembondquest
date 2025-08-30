@@ -1,0 +1,91 @@
+@import './globals.css';
+
+/* Additional custom styles for the Chemistry Bonding Quest game */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Ensure full viewport coverage */
+#root {
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Custom animations for chemistry bonding effects */
+@keyframes atomRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes electronOrbit {
+    from { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+}
+
+@keyframes bondingGlow {
+    0%, 100% { 
+        box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(79, 172, 254, 1), 0 0 40px rgba(79, 172, 254, 0.8);
+    }
+}
+
+@keyframes particleFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+/* Override any conflicting Tailwind utilities for animations */
+.animate-spin-slow {
+    animation: atomRotate 4s linear infinite;
+}
+
+.animate-bounce-gentle {
+    animation: particleFloat 3s ease-in-out infinite;
+}
+
+.glow-effect {
+    animation: bondingGlow 2s ease-in-out infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    /* Ensure touch targets are at least 44px */
+    button, .clickable {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Prevent horizontal scroll on mobile */
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .bg-gradient-to-r {
+        background: solid !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
